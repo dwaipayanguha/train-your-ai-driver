@@ -8,7 +8,7 @@ export default makeStyles(() => ({
   },
   paper: {
     padding: "10px",
-    // marginLeft: "10px",
+    marginLeft: "10px",
   },
   form: {
     display: "flex",

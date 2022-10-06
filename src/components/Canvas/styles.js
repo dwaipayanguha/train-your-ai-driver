@@ -18,4 +18,18 @@ export default makeStyles(() => ({
     justifyContent: "center",
     alignItems: "center",
   },
+  paper: {
+    padding: "10px",
+    marginLeft: "10px",
+  },
+  form: {
+    background: "gray",
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "center",
+  },
+  buttonSubmit: {
+    justifyContent: "center",
+    marginBottom: 10,
+  },
 }));

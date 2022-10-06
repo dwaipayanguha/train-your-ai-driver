@@ -7,7 +7,6 @@ import useStyles from "./styles";
 
 const App = () => {
   const classes = useStyles();
-
   return (
     <Grid container direction="row" spacing={4}>
       <Grid item container direction="column" xs={4} spacing={4}>

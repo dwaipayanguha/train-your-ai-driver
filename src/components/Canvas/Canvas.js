@@ -1,10 +1,11 @@
-import React, { useRef, useEffect, useContext } from "react";
-import { Grid } from "@material-ui/core";
+import React, { useRef, useEffect } from "react";
+import { Grid, Button, Paper } from "@material-ui/core";
 
 import useStyles from "./styles";
 
 import getRandomColour from "../../utils/getRandomColour.js";
 import { defaultState } from "../../constants/defaultState";
+import { defaultSettings } from "../../constants/defaultSettings";
 
 import Car from "../Car/car.js";
 import Road from "../Road/road";
@@ -38,25 +39,30 @@ function generateTraffic(trafficOptions, road) {
 }
 
 function modifyCar() {
-  const simulation =
-    JSON.parse(localStorage.getItem("simulation")) || defaultState;
-  simulation.road = new Road(500 / 2, 500 * 0.9);
+  const simulation = defaultState;
+  const simulationSettings =
+    JSON.parse(localStorage.getItem("simulationSettings")) || defaultSettings;
 
-  simulation.cars = generateCars(simulation.parallelCars, simulation.road);
+  simulation.road = new Road(600 / 2, 600 * 0.9);
+
+  simulation.cars = generateCars(
+    simulationSettings.parallelCars,
+    simulation.road
+  );
   simulation.bestCar = simulation.cars[0];
-  if (simulation.bestBrain) {
+  if (localStorage.getItem("bestBrain")) {
     for (let i = 0; i < simulation.cars.length; i++) {
-      simulation.cars[i].brain = simulation.bestBrain;
+      simulation.cars[i].brain = JSON.parse(localStorage.getItem("bestBrain"));
 
       if (i != 0) {
         NeuralNetwork.mutate(simulation.cars[i].brain, 0.1);
       }
     }
 
-    simulation.bestCar.brain = simulation.bestBrain;
+    simulation.bestCar.brain = JSON.parse(localStorage.getItem("bestBrain"));
   }
   simulation.traffic = generateTraffic(
-    simulation.trafficOptions,
+    simulationSettings.trafficOptions,
     simulation.road
   );
 
@@ -84,7 +90,7 @@ const Canvas = () => {
     networkCtx.current.height = window.innerHeight;
 
     simulation.bestCar = simulation.cars.find(
-      (c) => c.y == Math.min(...simulation.cars.map((c) => c.y))
+      (c) => c.y === Math.min(...simulation.cars.map((c) => c.y))
     );
 
     carCtx.current.save();
@@ -113,9 +119,25 @@ const Canvas = () => {
     // requestAnimationFrame(animate);
   };
 
+  const deleteBestBrain = () => {
+    simulation.bestBrain = null;
+    localStorage.removeItem("bestBrain");
+  };
+
+  const rememberBestBrain = () => {
+    localStorage.setItem("bestBrain", JSON.stringify(simulation.bestCar.brain));
+  };
+
+  const restartSimulation = () => {
+    window.location.reload();
+  };
+
   useEffect(() => {
     const carCanvas = CarCanvasRef.current;
     const networkCanvas = NetworkCanvasRef.current;
+
+    carCanvas.width = "600";
+    networkCanvas.width = "400";
 
     const carContext = carCanvas.getContext("2d");
     const networkContext = networkCanvas.getContext("2d");
@@ -125,7 +147,7 @@ const Canvas = () => {
 
     simulation = modifyCar();
     animate();
-  }, [animate, localStorage.getItem("simulation")]);
+  }, [animate, localStorage.getItem("simulationSettings")]);
 
   return (
     <Grid container spacing={2}>
@@ -138,6 +160,62 @@ const Canvas = () => {
             height={window.innerHeight}
           ></canvas>
         </div>
+      </Grid>
+      <Grid
+        className={classes.form}
+        item
+        container
+        direction="column"
+        xs
+        spacing={2}
+      >
+        <Grid item xs></Grid>
+        <Grid item xs></Grid>
+        <Grid item xs>
+          <Button
+            className={classes.buttonSubmit}
+            variant="contained"
+            color="primary"
+            size="large"
+            type="submit"
+            fullWidth
+            onClick={rememberBestBrain}
+          >
+            Remember current car as best car
+          </Button>
+        </Grid>
+
+        <Grid item xs>
+          <Button
+            className={classes.buttonSubmit}
+            variant="contained"
+            color="primary"
+            size="large"
+            type="submit"
+            align="flex"
+            fullWidth
+            onClick={deleteBestBrain}
+          >
+            Delete best car
+          </Button>
+        </Grid>
+
+        <Grid item xs>
+          <Button
+            className={classes.buttonSubmit}
+            variant="contained"
+            color="primary"
+            size="large"
+            type="submit"
+            align="flex"
+            fullWidth
+            onClick={restartSimulation}
+          >
+            Restart simulation with chosen best car
+          </Button>
+        </Grid>
+        <Grid item xs></Grid>
+        <Grid item xs></Grid>
       </Grid>
       <Grid item container direction="column" xs spacing={2}>
         <div className={classes.container}>
