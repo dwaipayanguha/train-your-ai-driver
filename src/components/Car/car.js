@@ -6,7 +6,16 @@ import img from "./car.png";
 import polyIntersect from "../../utils/polyIntersect";
 
 class Car {
-  constructor(x, y, width, height, controlType, maxSpeed = 3, color = "blue") {
+  constructor(
+    x,
+    y,
+    width,
+    height,
+    controlType,
+    hiddenLayers,
+    maxSpeed = 3,
+    color = "blue"
+  ) {
     this.x = x;
     this.y = y;
     this.width = width;
@@ -23,7 +32,11 @@ class Car {
 
     if (controlType != "DUMMY") {
       this.sensor = new Sensor(this);
-      this.brain = new NeuralNetwork([this.sensor.rayCount, 6, 4]);
+      this.brain = new NeuralNetwork([
+        this.sensor.rayCount,
+        ...hiddenLayers,
+        4,
+      ]);
     }
     this.controls = new Controls(controlType);
 

@@ -12,10 +12,10 @@ import Road from "../Road/road";
 import NeuralNetwork from "../NeuralNetwork/neuralNetwork";
 import Visualizer from "../Visualizer/visualizer";
 
-function generateCars(N, road) {
+function generateCars(N, road, hiddenLayers) {
   const cars = [];
   for (let i = 0; i < N; i++) {
-    cars.push(new Car(road.getLaneCenter(1), 100, 30, 50, "AI"));
+    cars.push(new Car(road.getLaneCenter(1), 100, 30, 50, "AI", hiddenLayers));
   }
   return cars;
 }
@@ -29,6 +29,7 @@ function generateTraffic(trafficOptions, road) {
       30,
       50,
       "DUMMY",
+      [],
       2,
       getRandomColour()
     );
@@ -40,14 +41,16 @@ function generateTraffic(trafficOptions, road) {
 
 function modifyCar() {
   const simulation = defaultState;
-  const simulationSettings =
-    JSON.parse(localStorage.getItem("simulationSettings")) || defaultSettings;
+  let simulationSettings = defaultSettings;
+  if (localStorage.getItem("simulationSettings"))
+    simulationSettings = JSON.parse(localStorage.getItem("simulationSettings"));
 
-  simulation.road = new Road(600 / 2, 600 * 0.9);
+  simulation.road = new Road(600 / 2, 600 * 0.9, simulationSettings.lanes);
 
   simulation.cars = generateCars(
     simulationSettings.parallelCars,
-    simulation.road
+    simulation.road,
+    simulationSettings.hiddenLayers
   );
   simulation.bestCar = simulation.cars[0];
   if (localStorage.getItem("bestBrain")) {
@@ -116,7 +119,7 @@ const Canvas = () => {
 
     networkCtx.lineDashOffset = -time / 50;
     Visualizer.drawNetwork(networkCtx.current, simulation.bestCar.brain);
-    // requestAnimationFrame(animate);
+    requestAnimationFrame(animate);
   };
 
   const deleteBestBrain = () => {

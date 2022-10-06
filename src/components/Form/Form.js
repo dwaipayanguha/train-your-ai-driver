@@ -57,12 +57,12 @@ const Form = () => {
     window.location.reload();
   };
 
-  const handleDeleteTraffic = (data) => {
-    setTrafficList((current) => current.filter((traffic) => traffic != data));
+  const handleDeleteTraffic = (idx) => {
+    setTrafficList((current) => current.filter((_, index) => index != idx));
   };
 
-  const handleDeleteLayer = (data) => {
-    setLayerList((current) => current.filter((cell) => cell != data));
+  const handleDeleteLayer = (idx) => {
+    setLayerList((current) => current.filter((_, index) => index != idx));
   };
 
   useEffect(() => {
@@ -85,24 +85,24 @@ const Form = () => {
     setLayerList(simulationSettings.hiddenLayers);
   }, []);
 
-  const layers = layersList.map((data, id) => {
+  const layers = layersList.map((data, index) => {
     return (
       <Chip
-        id={id}
+        id={index}
         label={`Cells: ${data}`}
         variant="outlines"
-        onDelete={handleDeleteLayer.bind(this, data)}
+        onDelete={handleDeleteLayer.bind(this, index)}
       />
     );
   });
 
-  const traffic = trafficList.map((data, id) => {
+  const traffic = trafficList.map((data, index) => {
     return (
       <Chip
-        id={id}
+        id={index}
         label={`Lane: ${data.lane + 1}  Height: ${-data.height}`}
         variant="outlined"
-        onDelete={handleDeleteTraffic.bind(this, data)}
+        onDelete={handleDeleteTraffic.bind(this, index)}
       />
     );
   });
@@ -139,7 +139,7 @@ const Form = () => {
           variant="outlined"
           label="Number of cells in the new layer"
           fullWidth
-          value="5"
+          value={formLayer}
           onChange={(e) => setFormLayer(e.target.value)}
         />
         <>{layers}</>
@@ -162,7 +162,7 @@ const Form = () => {
           variant="outlined"
           label="Lane Number (1 / 2 / 3 ...)"
           fullWidth
-          value="1"
+          value={formTraffic.lane}
           onChange={(e) =>
             setFormTraffic({
               ...formTraffic,
@@ -176,7 +176,7 @@ const Form = () => {
           variant="outlined"
           label="When should the dummy car appear (value in 100s)"
           fullWidth
-          value="100"
+          value={-formTraffic.height}
           onChange={(e) =>
             setFormTraffic({
               ...formTraffic,

@@ -12,5 +12,5 @@ export const defaultSettings = {
     { lane: 1, height: -800 },
     { lane: 0, height: -900 },
   ],
-  hiddenLayers: [6, 4],
+  hiddenLayers: [6],
 };
