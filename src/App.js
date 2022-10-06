@@ -1,7 +1,8 @@
 import React from "react";
 import { Grid } from "@material-ui/core";
 
-import Canvas from "./components/Canvas/Canvas";
+import CarCanvas from "./components/Canvas/CarCanvas/CarCanvas";
+import NetworkCanvas from "./components/Canvas/NetworkCanvas/NetworkCanvas";
 import Form from "./components/Form/Form";
 import useStyles from "./styles";
 
@@ -17,12 +18,12 @@ const App = () => {
       </Grid>
       <Grid item container direction="column" xs spacing={2}>
         <div className={classes.container}>
-          <Canvas type="carCanvas" />
+          <CarCanvas />
         </div>
       </Grid>
       <Grid item container direction="column" xs spacing={2}>
         <div className={classes.container}>
-          <Canvas type="networkCanvas" />
+          <NetworkCanvas />
         </div>
       </Grid>
     </Grid>

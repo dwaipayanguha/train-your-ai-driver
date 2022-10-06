@@ -1,13 +1,14 @@
 import { makeStyles } from "@material-ui/core/styles";
 
-export default makeStyles((theme) => ({
+export default makeStyles(() => ({
   root: {
     "& .MuiTextField-root": {
-      margin: theme.spacing(1),
+      margin: "10px",
     },
   },
   paper: {
-    padding: theme.spacing(2),
+    padding: "10px",
+    // marginLeft: "10px",
   },
   form: {
     display: "flex",
@@ -16,5 +17,10 @@ export default makeStyles((theme) => ({
   },
   buttonSubmit: {
     marginBottom: 10,
+  },
+  radioGroup: {
+    display: "flex",
+    justifyContent: "center",
+    marginBottom: "10px",
   },
 }));

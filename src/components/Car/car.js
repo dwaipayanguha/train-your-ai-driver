@@ -1,6 +1,7 @@
 import Sensor from "../Sensor/sensor";
 import NeuralNetwork from "../NeuralNetwork/neuralNetwork";
 import Controls from "../Controls/controls";
+import img from "./car.png";
 
 import polyIntersect from "../../utils/polyIntersect";
 
@@ -27,7 +28,7 @@ class Car {
     this.controls = new Controls(controlType);
 
     this.img = new Image();
-    this.img.src = "car.png";
+    this.img.src = img;
 
     this.mask = document.createElement("canvas");
     this.mask.width = width;

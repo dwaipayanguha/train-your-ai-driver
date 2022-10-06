@@ -44,16 +44,7 @@ const Form = () => {
             })
           }
         />
-        <TextField
-          name="traffic"
-          variant="outlined"
-          label="Traffic"
-          fullWidth
-          value={simulationData.traffic}
-          onChange={(e) =>
-            setSimulationData({ ...simulationData, traffic: e.target.value })
-          }
-        />
+
         <TextField
           name="hiddenLayers"
           variant="outlined"

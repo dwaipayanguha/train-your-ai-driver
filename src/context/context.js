@@ -13,15 +13,15 @@ export const Provider = ({ children }) => {
 
   //Action creators
   const deleteCar = () => {
-    dispatch({ type: "DELETE_Car" });
+    dispatch({ type: "DELETE_CAR" });
   };
 
-  const addCar = () => {
-    dispatch({ type: "ADD_Car" });
+  const modifyCar = () => {
+    dispatch({ type: "MODIFY_CAR" });
   };
 
   return (
-    <SimulationContext.Provider value={{ deleteCar, addCar, simulation }}>
+    <SimulationContext.Provider value={{ deleteCar, modifyCar, simulation }}>
       {children}
     </SimulationContext.Provider>
   );
