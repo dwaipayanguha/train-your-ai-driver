@@ -21,39 +21,79 @@ const Form = () => {
   const [trafficList, setTrafficList] = useState([]);
   const [layersList, setLayerList] = useState([]);
 
-  const handleSubmit = () => {
+  const handleLaneSubmit = () => {
     let simulationSettings = defaultSettings;
     if (localStorage.getItem("simulationSettings"))
       simulationSettings = JSON.parse(
         localStorage.getItem("simulationSettings")
       );
 
-    if (simulationData.lanes > 6 || simulationData < 0) {
-      setSimulationData({ ...simulationData, lane: simulationSettings.lanes });
-    }
     simulationSettings.lanes = simulationData.lanes;
-    if (simulationData.parallelCars < 0)
-      setSimulationData({
-        ...simulationData,
-        parallelCars: simulationSettings.parallelCars,
-      });
-    simulationSettings.parallelCars = simulationData.parallelCars;
-    simulationSettings.trafficOptions = trafficList;
 
-    if (layersList.length == 0) {
-      setLayerList(simulationSettings.hiddenLayers);
-    }
-    simulationSettings.hiddenLayers = layersList;
-
-    simulationSettings.hiddenLayers.push(formLayer);
-    if (formTraffic.lane > simulationSettings.lanes) {
-      setFormLayer({ ...formTraffic, lane: simulationSettings.lanes });
-    }
-    simulationSettings.trafficOptions.push(formTraffic);
     localStorage.setItem(
       "simulationSettings",
       JSON.stringify(simulationSettings)
     );
+
+    localStorage.removeItem("bestBrain");
+
+    window.location.reload();
+  };
+
+  const handleParallelCarSubmit = () => {
+    let simulationSettings = defaultSettings;
+    if (localStorage.getItem("simulationSettings"))
+      simulationSettings = JSON.parse(
+        localStorage.getItem("simulationSettings")
+      );
+
+    simulationSettings.parallelCars = simulationData.parallelCars;
+
+    localStorage.setItem(
+      "simulationSettings",
+      JSON.stringify(simulationSettings)
+    );
+
+    localStorage.removeItem("bestBrain");
+
+    window.location.reload();
+  };
+
+  const handleLayerSubmit = () => {
+    let simulationSettings = defaultSettings;
+    if (localStorage.getItem("simulationSettings"))
+      simulationSettings = JSON.parse(
+        localStorage.getItem("simulationSettings")
+      );
+
+    simulationSettings.hiddenLayers.push(formLayer);
+
+    localStorage.setItem(
+      "simulationSettings",
+      JSON.stringify(simulationSettings)
+    );
+
+    localStorage.removeItem("bestBrain");
+
+    window.location.reload();
+  };
+
+  const handleTrafficSubmit = () => {
+    let simulationSettings = defaultSettings;
+    if (localStorage.getItem("simulationSettings"))
+      simulationSettings = JSON.parse(
+        localStorage.getItem("simulationSettings")
+      );
+
+    simulationSettings.trafficOptions.push(formTraffic);
+
+    localStorage.setItem(
+      "simulationSettings",
+      JSON.stringify(simulationSettings)
+    );
+
+    localStorage.removeItem("bestBrain");
+
     window.location.reload();
   };
 
@@ -114,7 +154,6 @@ const Form = () => {
         autoComplete="off"
         noValidate
         className={`${classes.form} ${classes.root}`}
-        onSubmit={handleSubmit}
       >
         <Typography variant="h4"> Train your AI driver </Typography>
         <TextField
@@ -130,7 +169,17 @@ const Form = () => {
             })
           }
         />
-
+        <Button
+          className={classes.buttonSubmit}
+          variant="contained"
+          color="primary"
+          size="large"
+          type="submit"
+          fullWidth
+          onClick={handleLaneSubmit}
+        >
+          Update Number of Lanes
+        </Button>
         <Typography variant="h6">
           Add a hidden layer in the neural network
         </Typography>
@@ -143,6 +192,17 @@ const Form = () => {
           onChange={(e) => setFormLayer(e.target.value)}
         />
         <>{layers}</>
+        <Button
+          className={classes.buttonSubmit}
+          variant="contained"
+          color="primary"
+          size="large"
+          type="submit"
+          fullWidth
+          onClick={handleLayerSubmit}
+        >
+          Add Layer
+        </Button>
         <TextField
           name="parallelCars"
           variant="outlined"
@@ -156,6 +216,17 @@ const Form = () => {
             })
           }
         />
+        <Button
+          className={classes.buttonSubmit}
+          variant="contained"
+          color="primary"
+          size="large"
+          type="submit"
+          fullWidth
+          onClick={handleParallelCarSubmit}
+        >
+          Update Number of Parallel Cars
+        </Button>
         <Typography variant="h6"> Add dummy cars in traffic </Typography>
         <TextField
           name="lane"
@@ -192,9 +263,9 @@ const Form = () => {
           size="large"
           type="submit"
           fullWidth
-          onClick={handleSubmit}
+          onClick={handleTrafficSubmit}
         >
-          Submit
+          Add traffic
         </Button>
       </form>
     </Paper>
