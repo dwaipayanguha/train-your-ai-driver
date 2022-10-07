@@ -92,6 +92,8 @@ const Canvas = () => {
     carCtx.current.height = window.innerHeight;
     networkCtx.current.height = window.innerHeight;
 
+    carCtx.current.clearRect(0, 0, 600, window.innerHeight);
+
     simulation.bestCar = simulation.cars.find(
       (c) => c.y === Math.min(...simulation.cars.map((c) => c.y))
     );
@@ -112,7 +114,7 @@ const Canvas = () => {
     for (let i = 0; i < simulation.cars.length; i++) {
       simulation.cars[i].draw(carCtx.current);
     }
-    carCtx.current.globalAlpha = 0.2;
+    carCtx.current.globalAlpha = 1;
     simulation.bestCar.draw(carCtx.current, true);
 
     carCtx.current.restore();
