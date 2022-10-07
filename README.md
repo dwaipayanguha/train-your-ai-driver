@@ -1,70 +1,37 @@
-# Getting Started with Create React App
+<h1 style="text-align: center;">  TRAIN YOUR AI DRIVER </h1>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Live Website : [train-your-ai-driver](https://train-your-ai-driver.netlify.app/)
 
-## Available Scripts
+<img src="./src/assets/readMeImg.png">
 
-In the project directory, you can run:
+<br>
 
-### `npm start`
+# How to Play?
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Neural Network trains itself through parallel cars trying to manoeuvre through the traffic.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- The car with the sensors is the current best car in the simulation i.e. the car that has made the most progressed through the traffic.
 
-### `npm test`
+- Restart the training simulation with parallel cars generated from your best car.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Dump the current best car if you think its children cannot successfully manoeuvre through the traffic.
 
-### `npm run build`
+- The 5 sensors are the inputs to the neural network. Their activations can be seen in the bottom-most layer of the neural network animation.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- The controls of the car (up, down, left, right) are the outputs of the neural network. The triggering of the controls can be seen in the top-most layer of the neural network animation.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# Control your simulation
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Modify number of lanes on the road
 
-### `npm run eject`
+- Modify the hidden layers in the nerual network and watch the cells in the layers getting triggered in the animation
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- Add dummy traffic cars wherever required
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# For developers
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+To start the app in localhost (default port is 3000) :
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```bash
+    npm start
+```
