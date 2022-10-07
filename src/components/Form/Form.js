@@ -66,7 +66,8 @@ const Form = () => {
         localStorage.getItem("simulationSettings")
       );
 
-    simulationSettings.hiddenLayers.push(formLayer);
+    simulationSettings.hiddenLayers = layersList;
+    simulationSettings.hiddenLayers.push(parseInt(formLayer));
 
     localStorage.setItem(
       "simulationSettings",
@@ -85,6 +86,7 @@ const Form = () => {
         localStorage.getItem("simulationSettings")
       );
 
+    simulationSettings.trafficOptions = trafficList;
     simulationSettings.trafficOptions.push(formTraffic);
 
     localStorage.setItem(
@@ -201,7 +203,7 @@ const Form = () => {
           fullWidth
           onClick={handleLayerSubmit}
         >
-          Add Layer
+          Update Layers
         </Button>
         <TextField
           name="parallelCars"
@@ -265,7 +267,7 @@ const Form = () => {
           fullWidth
           onClick={handleTrafficSubmit}
         >
-          Add traffic
+          Update traffic
         </Button>
       </form>
     </Paper>
