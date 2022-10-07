@@ -13,10 +13,10 @@ const Form = () => {
     lanes: 3,
   });
 
-  const [formLayer, setFormLayer] = useState(3);
+  const [formLayer, setFormLayer] = useState(null);
   const [formTraffic, setFormTraffic] = useState({
-    lane: 1,
-    height: -100,
+    lane: null,
+    height: null,
   });
   const [trafficList, setTrafficList] = useState([]);
   const [layersList, setLayerList] = useState([]);
@@ -67,8 +67,9 @@ const Form = () => {
       );
 
     simulationSettings.hiddenLayers = layersList;
-    simulationSettings.hiddenLayers.push(parseInt(formLayer));
-
+    if (formLayer != null) {
+      simulationSettings.hiddenLayers.push(parseInt(formLayer));
+    }
     localStorage.setItem(
       "simulationSettings",
       JSON.stringify(simulationSettings)
@@ -87,7 +88,13 @@ const Form = () => {
       );
 
     simulationSettings.trafficOptions = trafficList;
-    simulationSettings.trafficOptions.push(formTraffic);
+    if (formTraffic.height !== null && formTraffic.lane !== null) {
+      setFormTraffic({
+        lane: parseInt(formTraffic.lane) + 1,
+        height: parseInt(formTraffic.height),
+      });
+      simulationSettings.trafficOptions.push(formTraffic);
+    }
 
     localStorage.setItem(
       "simulationSettings",
@@ -142,7 +149,7 @@ const Form = () => {
     return (
       <Chip
         id={index}
-        label={`Lane: ${data.lane + 1}  Height: ${-data.height}`}
+        label={`Lane: ${parseInt(data.lane) + 1}  Height: ${-data.height}`}
         variant="outlined"
         onDelete={handleDeleteTraffic.bind(this, index)}
       />
