@@ -10,7 +10,7 @@
 
 - Neural Network trains itself through parallel cars trying to manoeuvre through the traffic.
 
-- The car with the sensors is the current best car in the simulation i.e. the car that has made the most progressed through the traffic.
+- The car with the sensors is the current best car in the simulation i.e. the car that has made the most progress through the traffic.
 
 - Restart the training simulation with parallel cars generated from your best car.
 
