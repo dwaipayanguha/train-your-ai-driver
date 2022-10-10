@@ -2,7 +2,7 @@
 
 ## Live Website : [train-your-ai-driver](https://train-your-ai-driver.netlify.app/)
 
-<img src="./src/assets/readMeImg.png">
+https://user-images.githubusercontent.com/63494787/194945420-bdae9464-dc71-4cc0-a196-3092038bf1b1.mp4
 
 <br>
 
@@ -17,6 +17,7 @@
 - Dump the current best car if you think its children cannot successfully manoeuvre through the traffic.
 
 - The 5 sensors are the inputs to the neural network. Their activations can be seen in the bottom-most layer of the neural network animation.
+
 
 - The controls of the car (up, down, left, right) are the outputs of the neural network. The triggering of the controls can be seen in the top-most layer of the neural network animation.
 
