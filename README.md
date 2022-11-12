@@ -12,9 +12,9 @@ https://user-images.githubusercontent.com/63494787/194945420-bdae9464-dc71-4cc0-
 
 - The car with the sensors is the current best car in the simulation i.e. the car that has made the most progress through the traffic.
 
-- Restart the training simulation with parallel cars generated from your best car.
+- Restart the training simulation with parallel cars mutated from your best car.
 
-- Dump the current best car if you think its children cannot successfully manoeuvre through the traffic.
+- Dump the current best car if you think its next generation models cannot successfully manoeuvre through the traffic.
 
 - The 5 sensors are the inputs to the neural network. Their activations can be seen in the bottom-most layer of the neural network animation.
 
@@ -25,9 +25,9 @@ https://user-images.githubusercontent.com/63494787/194945420-bdae9464-dc71-4cc0-
 
 - Modify number of lanes on the road
 
-- Modify the hidden layers in the nerual network and watch the cells in the layers getting triggered in the animation
+- Modify the hidden layers in the neural network and watch the cells in the layers of the network get triggered in the animation
 
-- Add dummy traffic cars wherever required
+- Add dummy traffic cars wherever you want to
 
 # For developers
 
